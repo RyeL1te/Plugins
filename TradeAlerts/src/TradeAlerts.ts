@@ -2,8 +2,6 @@ import { Plugin } from '@ryelite/core'
 import { SettingsTypes } from '@ryelite/core'
 import { NotificationManager } from '@ryelite/core'
 import { SoundManager } from '@ryelite/core'
-
-// @ts-ignore
 import TradeAlert from '../resources/sounds/trade_alert.mp3';
 
 export default class TradeAlerts extends Plugin {
