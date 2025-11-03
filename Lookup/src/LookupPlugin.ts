@@ -1,4 +1,4 @@
-import {ActionState, ContextMenuManager, ContextMenuTypes, EntityType, Plugin} from '@highlite/core';
+import {ActionState, ContextMenuManager, ContextMenuTypes, EntityType, Plugin} from '@ryelite/core';
 
 export default class LookupPlugin extends Plugin {
     pluginName = "Wiki Lookup";

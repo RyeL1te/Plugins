@@ -1,4 +1,4 @@
-import { Plugin, SettingsTypes } from "@highlite/core";
+import { Plugin, SettingsTypes } from '@ryelite/core';
 
 export default class BankTabs extends Plugin {
     pluginName = "Bank Tabs";

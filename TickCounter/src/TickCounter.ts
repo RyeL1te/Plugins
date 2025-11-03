@@ -1,5 +1,5 @@
-import {Plugin, SettingsTypes} from "@highlite/core";
-import { PanelManager, UIManager, UIManagerScope } from "@highlite/core";
+import {Plugin, SettingsTypes} from '@ryelite/core';
+import { PanelManager, UIManager, UIManagerScope } from '@ryelite/core';
 
 
 import Click1 from "../resources/sounds/click_001.mp3";

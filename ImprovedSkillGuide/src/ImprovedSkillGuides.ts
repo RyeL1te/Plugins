@@ -1,5 +1,5 @@
-import {Plugin, SettingsTypes, UIManager } from "@highlite/core";
-import { PanelManager } from "@highlite/core";
+import {Plugin, SettingsTypes, UIManager } from '@ryelite/core';
+import { PanelManager } from '@ryelite/core';
 import lookupTable from './lookupTable.json';
 
 export default class ImprovedSkillGuides extends Plugin {

@@ -1,5 +1,5 @@
-import { Plugin } from '@highlite/core';
-import { ContextMenuManager } from '@highlite/core';
+import { Plugin } from '@ryelite/core';
+import { ContextMenuManager } from '@ryelite/core';
 
 export default class ContextMenuOptions extends Plugin {
     pluginName = 'Context Menu Options';

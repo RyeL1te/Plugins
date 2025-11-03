@@ -369,32 +369,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@highlite/core@npm:^2.1.1":
-  version: 2.3.0
-  resolution: "@highlite/core@npm:2.3.0"
-  dependencies:
-    acorn: "npm:^8.15.0"
-    acorn-walk: "npm:^8.3.4"
-    idb: "npm:^8.0.3"
-    on-change: "npm:^5.0.1"
-    tsc: "npm:^2.0.4"
-  checksum: 10c0/f0eb1f83b72b40877d2fe289bdf2968b6974aba9f64f87abe430c975d77a63f6652f15504473bfc852e080308e8c29e199702820159c5775ec235c58007b64b5
-  languageName: node
-  linkType: hard
-
-"@highlite/core@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "@highlite/core@npm:2.2.0"
-  dependencies:
-    acorn: "npm:^8.15.0"
-    acorn-walk: "npm:^8.3.4"
-    idb: "npm:^8.0.3"
-    on-change: "npm:^5.0.1"
-    tsc: "npm:^2.0.4"
-  checksum: 10c0/6ae6af6ee931bfc9b695e231ecd58e0efecedce0b08ff2a2166f40685685ad998dc8b2a649dd5a8b697fd4dea4d42d4e367a4178cf7adbbc401577e37d0dde8f
-  languageName: node
-  linkType: hard
-
 "@humanfs/core@npm:^0.19.1":
   version: 0.19.1
   resolution: "@humanfs/core@npm:0.19.1"
@@ -464,6 +438,19 @@ __metadata:
     "@nodelib/fs.scandir": "npm:2.1.5"
     fastq: "npm:^1.6.0"
   checksum: 10c0/db9de047c3bb9b51f9335a7bb46f4fcfb6829fb628318c12115fbaf7d369bfce71c15b103d1fc3b464812d936220ee9bc1c8f762d032c9f6be9acc99249095b1
+  languageName: node
+  linkType: hard
+
+"@ryelite/core@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@ryelite/core@npm:0.1.1"
+  dependencies:
+    acorn: "npm:^8.15.0"
+    acorn-walk: "npm:^8.3.4"
+    idb: "npm:^8.0.3"
+    on-change: "npm:^5.0.1"
+    tsc: "npm:^2.0.4"
+  checksum: 10c0/1720f5d30c9cfbced0d0d5f77ce25a71db4c6767f868dc23d1936f3e70320e5a3357285bd7c211188273ef554256a4409a4d8b608e2ae58f5dfc5a033dd77c8d
   languageName: node
   linkType: hard
 
@@ -658,7 +645,7 @@ __metadata:
     "@eslint/js": "npm:^9.32.0"
     "@eslint/json": "npm:^0.13.1"
     "@eslint/markdown": "npm:^7.1.0"
-    "@highlite/core": "npm:^2.1.1"
+    "@ryelite/core": "npm:^0.1.1"
     esbuild: "npm:^0.25.8"
     eslint: "npm:^9.32.0"
     globals: "npm:^16.3.0"
@@ -675,7 +662,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "CoinCounter@workspace:CoinCounter"
   dependencies:
-    "@highlite/core": "npm:^2.2.0"
+    "@ryelite/core": "npm:^0.1.1"
     esbuild: "npm:^0.25.8"
     typescript: "npm:^5.8.3"
   languageName: unknown
@@ -685,7 +672,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ContextMenuOptions@workspace:ContextMenuOptions"
   dependencies:
-    "@highlite/core": "npm:^2.2.0"
+    "@ryelite/core": "npm:^0.1.1"
     esbuild: "npm:^0.25.8"
     typescript: "npm:^5.8.3"
   languageName: unknown
@@ -695,7 +682,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "CustomCursor@workspace:CustomCursor"
   dependencies:
-    "@highlite/core": "npm:^2.1.1"
+    "@ryelite/core": "npm:^0.1.1"
     esbuild: "npm:^0.25.8"
     typescript: "npm:^5.8.3"
   languageName: unknown
@@ -705,7 +692,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ExamplePlugin@workspace:ImprovedSkillGuide"
   dependencies:
-    "@highlite/core": "npm:^2.1.1"
+    "@ryelite/core": "npm:^0.1.1"
     esbuild: "npm:^0.25.8"
     typescript: "npm:^5.8.3"
   languageName: unknown
@@ -715,7 +702,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ExperienceTracker@workspace:ExperienceTracker"
   dependencies:
-    "@highlite/core": "npm:^2.2.0"
+    "@ryelite/core": "npm:^0.1.1"
     esbuild: "npm:^0.25.8"
     typescript: "npm:^5.8.3"
   languageName: unknown
@@ -725,7 +712,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "FPSLimiter@workspace:FPSLimiter"
   dependencies:
-    "@highlite/core": "npm:^2.2.0"
+    "@ryelite/core": "npm:^0.1.1"
     esbuild: "npm:^0.25.8"
     typescript: "npm:^5.8.3"
   languageName: unknown
@@ -735,7 +722,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "HPAlert@workspace:HPAlert"
   dependencies:
-    "@highlite/core": "npm:^2.2.0"
+    "@ryelite/core": "npm:^0.1.1"
     esbuild: "npm:^0.25.8"
     typescript: "npm:^5.8.3"
   languageName: unknown
@@ -745,7 +732,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "Lookup@workspace:Lookup"
   dependencies:
-    "@highlite/core": "npm:^2.2.0"
+    "@ryelite/core": "npm:^0.1.1"
     esbuild: "npm:^0.25.8"
     typescript: "npm:^5.8.3"
   languageName: unknown
@@ -755,7 +742,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "Map@workspace:Map"
   dependencies:
-    "@highlite/core": "npm:^2.2.0"
+    "@ryelite/core": "npm:^0.1.1"
     esbuild: "npm:^0.25.8"
     interactjs: "npm:^1.10.27"
     typescript: "npm:^5.8.3"
@@ -767,7 +754,7 @@ __metadata:
   resolution: "Nameplates@workspace:Nameplates"
   dependencies:
     "@babylonjs/core": "npm:^8.18.0"
-    "@highlite/core": "npm:^2.2.0"
+    "@ryelite/core": "npm:^0.1.1"
     esbuild: "npm:^0.25.8"
     typescript: "npm:^5.8.3"
   languageName: unknown
@@ -777,7 +764,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "PMAlerts@workspace:PMAlerts"
   dependencies:
-    "@highlite/core": "npm:^2.2.0"
+    "@ryelite/core": "npm:^0.1.1"
     esbuild: "npm:^0.25.8"
     typescript: "npm:^5.8.3"
   languageName: unknown
@@ -787,7 +774,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "PlayerTagger@workspace:ClanTags"
   dependencies:
-    "@highlite/core": "npm:^2.1.1"
+    "@ryelite/core": "npm:^0.1.1"
     esbuild: "npm:^0.25.8"
     typescript: "npm:^5.8.3"
   languageName: unknown
@@ -797,7 +784,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "QuickActionMouseTooltip@workspace:QuickActionTooltip"
   dependencies:
-    "@highlite/core": "npm:^2.1.1"
+    "@ryelite/core": "npm:^0.1.1"
     esbuild: "npm:^0.25.8"
     typescript: "npm:^5.8.3"
   languageName: unknown
@@ -807,7 +794,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "TickCounter@workspace:TickCounter"
   dependencies:
-    "@highlite/core": "npm:^2.1.1"
+    "@ryelite/core": "npm:^0.1.1"
     esbuild: "npm:^0.25.8"
     typescript: "npm:^5.8.3"
   languageName: unknown
@@ -817,7 +804,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "TradeAlerts@workspace:TradeAlerts"
   dependencies:
-    "@highlite/core": "npm:^2.2.0"
+    "@ryelite/core": "npm:^0.1.1"
     esbuild: "npm:^0.25.8"
     typescript: "npm:^5.8.3"
   languageName: unknown
@@ -827,7 +814,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "TtsChat@workspace:TTSChat"
   dependencies:
-    "@highlite/core": "npm:^2.1.1"
+    "@ryelite/core": "npm:^0.1.1"
     esbuild: "npm:^0.25.8"
     typescript: "npm:^5.8.3"
   languageName: unknown

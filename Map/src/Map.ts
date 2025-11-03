@@ -1,5 +1,5 @@
-import { Plugin } from '@highlite/core';
-import { PanelManager } from '@highlite/core';
+import { Plugin } from '@ryelite/core';
+import { PanelManager } from '@ryelite/core';
 
 import interact from 'interactjs';
 

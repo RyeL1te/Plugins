@@ -1,7 +1,7 @@
-import { NotificationManager } from '@highlite/core';
-import { Plugin } from '@highlite/core';
-import { SettingsTypes } from '@highlite/core';
-import { SoundManager } from '@highlite/core';
+import { NotificationManager } from '@ryelite/core';
+import { Plugin } from '@ryelite/core';
+import { SettingsTypes } from '@ryelite/core';
+import { SoundManager } from '@ryelite/core';
 import LowHPSound from "../resources/sounds/heartbeat.mp3";
 
 export default class HPAlert extends Plugin {

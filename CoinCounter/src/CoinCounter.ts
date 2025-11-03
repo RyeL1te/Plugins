@@ -1,9 +1,9 @@
-import { Plugin, SettingsTypes } from '@highlite/core';
+import { Plugin, SettingsTypes } from '@ryelite/core';
 import {
     UIManager,
     UIManagerScope,
     abbreviateValue,
-} from '@highlite/core';
+} from '@ryelite/core';
 
 export default class CoinCounter extends Plugin {
     pluginName = "Coin Counter";

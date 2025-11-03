@@ -1,4 +1,4 @@
-import {Plugin, SettingsTypes} from "@highlite/core";
+import {Plugin, SettingsTypes} from '@ryelite/core';
 
 import Bronze_scimitar from '../resources/images/customCursor/Bronze_scimitar.png';
 import Celadon_scimitar from '../resources/images/customCursor/Celadon_scimitar.png';
