@@ -1,7 +1,7 @@
-import { Plugin } from '@highlite/core';
-import { SettingsTypes } from '@highlite/core';
-import { NotificationManager } from '@highlite/core';
-import { SoundManager } from '@highlite/core';
+import { Plugin } from '@ryelite/core';
+import { SettingsTypes } from '@ryelite/core';
+import { NotificationManager } from '@ryelite/core';
+import { SoundManager } from '@ryelite/core';
 import PMAlert from "../resources/sounds/pm_alert.mp3";
 
 export default class PMAlerts extends Plugin {

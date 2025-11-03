@@ -10,7 +10,7 @@
     },
     "main": "src/ContextMenuOptions.ts",
     "devDependencies": {
-        "@highlite/core": "^2.2.0",
+        "@ryelite/core": "^0.1.1",
         "esbuild": "^0.25.8",
         "typescript": "^5.8.3"
     }
