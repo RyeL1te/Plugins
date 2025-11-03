@@ -1,0 +1,16 @@
+{
+  "name": "QuickActionMouseTooltip",
+  "packageManager": "yarn@4.9.1",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "main": "src/QuickActionMouseTooltip.ts",
+  "devDependencies": {
+    "@highlite/core": "^2.1.1",
+    "esbuild": "^0.25.8",
+    "typescript": "^5.8.3"
+  }
+}
