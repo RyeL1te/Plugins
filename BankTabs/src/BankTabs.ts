@@ -342,7 +342,7 @@ export default class BankTabs extends Plugin {
         searchClearButton.style.background = "red";
         searchClearButton.style.top = "50%";
         searchClearButton.style.right = "5px";
-        searchClearButton.style.padding = "0 0 0 1px";
+        searchClearButton.style.padding = "0";
         searchClearButton.style.position = "absolute";
         searchClearButton.style.borderRadius = "100%";
         searchClearButton.style.transform = "translateY(-50%)";
