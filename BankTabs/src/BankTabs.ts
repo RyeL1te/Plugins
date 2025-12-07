@@ -4,7 +4,9 @@ export default class BankTabs extends Plugin {
     pluginName = "Bank Tabs";
     author = "0rangeYouGlad";
 
-    private tabBox: HTMLElement | null = null;
+    private container: HTMLElement | null = null;
+    private searchInput: HTMLInputElement | null = null;
+    private searchClearButton: HTMLButtonElement | null = null;
     private lastQuery: [string] = ["*"];
     private selectedTab = "All";
     private resizeListener: ResizeObserver | null = null;
@@ -17,6 +19,12 @@ export default class BankTabs extends Plugin {
     constructor() {
         super();
 
+        const update = () => {
+            this.removeTabBox();
+            this.injectTabBox();
+            this.updateTab();
+        }
+
         this.settings.memory = {
             text: "Remember selected tab between banking session",
             type: SettingsTypes.checkbox,
@@ -28,110 +36,70 @@ export default class BankTabs extends Plugin {
             text: "All tab excludes other tab contents",
             type: SettingsTypes.checkbox,
             value: true,
-            callback: () => {
-                this.removeTabBox();
-                this.injectTabBox();
-                this.updateTab();
-            },
+            callback: update,
         };
 
         this.settings.grayOut = {
             text: "Gray Out items instead of hiding",
             type: SettingsTypes.checkbox,
             value: false,
-            callback: () => {
-                this.removeTabBox();
-                this.injectTabBox();
-                this.updateTab();
-            },
+            callback: update,
         };
 
         this.settings.mutuallyExclusiveTabs = {
             text: "Mutually Exclusive Tabs (uncheck to allow items in multiple tabs)",
             type: SettingsTypes.checkbox,
             value: true,
-            callback: () => {
-                this.removeTabBox();
-                this.injectTabBox();
-                this.updateTab();
-            },
+            callback: update,
         };
 
         this.settings.allowResize = {
             text: "Resizeable Tabs",
             type: SettingsTypes.checkbox,
             value: false,
-            callback: () => {
-                this.removeTabBox();
-                this.injectTabBox();
-                this.updateTab();
-            },
+            callback: update,
         };
 
         this.settings.allowAddRemove = {
             text: "Show Add/Remove Control",
             type: SettingsTypes.checkbox,
             value: true,
-            callback: () => {
-                this.removeTabBox();
-                this.injectTabBox();
-                this.updateTab();
-            },
+            callback: update,
         };
 
         this.settings.showTabReordering = {
             text: "Show Reordering Controls",
             type: SettingsTypes.checkbox,
             value: false,
-            callback: () => {
-                this.removeTabBox();
-                this.injectTabBox();
-                this.updateTab();
-            },
+            callback: update,
         };
 
         this.settings.bankTabColor = {
             text: "Inactive Bank Tab Color",
             type: SettingsTypes.color,
             value: "#464646",
-            callback: () => {
-                this.removeTabBox();
-                this.injectTabBox();
-                this.updateTab();
-            },
+            callback: update,
         };
 
         this.settings.bankTabColorActive = {
             text: "Active Bank Tab Color",
             type: SettingsTypes.color,
             value: "#d3d3d3",
-            callback: () => {
-                this.removeTabBox();
-                this.injectTabBox();
-                this.updateTab();
-            },
+            callback: update,
         };
 
         this.settings.bankTabColorHovered = {
             text: "Hovered Bank Tab Color",
             type: SettingsTypes.color,
             value: "#787878ff",
-            callback: () => {
-                this.removeTabBox();
-                this.injectTabBox();
-                this.updateTab();
-            },
+            callback: update,
         };
 
         this.settings.bankTabColorActive = {
             text: "Active Bank Tab Color",
             type: SettingsTypes.color,
             value: "#878787ff",
-            callback: () => {
-                this.removeTabBox();
-                this.injectTabBox();
-                this.updateTab();
-            },
+            callback: update,
         };
 
         this.settings.bankTabPaddingWidth = {
@@ -140,11 +108,7 @@ export default class BankTabs extends Plugin {
             value: 8,
             min: 0,
             max: 32,
-            callback: () => {
-                this.removeTabBox();
-                this.injectTabBox();
-                this.updateTab();
-            },
+            callback: update,
         };
 
         this.settings.bankTabPaddingHeight = {
@@ -153,11 +117,7 @@ export default class BankTabs extends Plugin {
             value: 8,
             min: 0,
             max: 32,
-            callback: () => {
-                this.removeTabBox();
-                this.injectTabBox();
-                this.updateTab();
-            },
+            callback: update,
         };
     }
 
@@ -246,7 +206,7 @@ export default class BankTabs extends Plugin {
 
         if (isVisible && !this.tax) {
             this.injectTabBox();
-        } else if (!isVisible && this.tabBox) {
+        } else if (!isVisible && this.container) {
             this.removeTabBox();
         }
     }
@@ -321,6 +281,16 @@ export default class BankTabs extends Plugin {
         }
     }
 
+    resetSearch() {
+        if (this.searchInput) {
+            this.searchInput.value = "";
+        }
+        if (this.searchClearButton) {
+            this.searchClearButton.style.display = "none";
+        }
+        this.performSearch("");
+    }
+
     injectTabBox() {
         if (!this.data.tabGroups) {
             this.data.tabGroups = this.defaultTabGroups;
@@ -338,7 +308,7 @@ export default class BankTabs extends Plugin {
         this.applyStyling();
 
         // Prevent duplicate injection - check both internal reference and DOM presence
-        if (this.tabBox || document.getElementById("bank-tabs")) return;
+        if (this.container || document.getElementById("bank-tabs")) return;
 
         // Find the bank menu and header
         const bankMenu = document.getElementById("hs-bank-menu");
@@ -350,6 +320,72 @@ export default class BankTabs extends Plugin {
         if (!mainBankItemsBox) return;
 
         // Create the tab container
+        const container = document.createElement("div");
+        container.id = "bank-tabs-container";
+        container.style.display = "flex";
+        container.style.flexDirection = "column";
+        container.style.width = "-webkit-fill-available";
+        container.classList.add("bank-tabs-container");
+        this.container = container;
+
+        const searchContainer = document.createElement("div");
+        searchContainer.style.display = "flex";
+        searchContainer.style.flexWrap = "wrap";
+        searchContainer.style.float = "left";
+        searchContainer.style.width = "inherit";
+        searchContainer.style.position = "relative";
+
+        const searchClearButton = document.createElement("button");
+        searchClearButton.innerText = "X";
+        searchClearButton.style.minWidth = "20px";
+        searchClearButton.style.maxWidth = "20px";
+        searchClearButton.style.background = "red";
+        searchClearButton.style.top = "50%";
+        searchClearButton.style.right = "5px";
+        searchClearButton.style.padding = "0";
+        searchClearButton.style.position = "absolute";
+        searchClearButton.style.borderRadius = "100%";
+        searchClearButton.style.transform = "translateY(-50%)";
+        searchClearButton.style.display = "none";
+        this.searchClearButton = searchClearButton;
+
+        const searchInput = document.createElement("input");
+        searchInput.id = "bank-search";
+        searchInput.type = "text";
+        searchInput.placeholder = "Search for item(s)";
+        searchInput.style.flex = "flex-grow";
+        searchInput.classList.add("bank-tab-button");
+        searchInput.classList.add("hs-text--white");
+        searchInput.classList.add("hs-text-input");
+        searchInput.style.width = "-webkit-fill-available";
+        searchInput.size = 1;
+        this.searchInput = searchInput;
+
+        searchInput.addEventListener("keydown", (e) => e.stopPropagation());
+        searchInput.addEventListener("keyup", (e) => e.stopPropagation());
+        searchInput.addEventListener("keypress", (e) => e.stopPropagation());
+
+        // Add focus styling and prevent focus stealing (matching other plugins)
+        searchInput.addEventListener("focus", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+        // Prevent focus stealing on mousedown
+        searchInput.addEventListener("mousedown", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            searchInput.focus();
+        });
+        searchClearButton.addEventListener("click", (e) => {
+            this.resetSearch(); // reset
+        });
+        searchInput.addEventListener("input", (e) => {
+            searchClearButton.style.display = (searchInput.value && searchInput.value !== "") ? "block" : "none";
+            this.performSearch(searchInput.value);
+        });
+        searchContainer.appendChild(searchInput);
+        searchContainer.appendChild(searchClearButton);
+
         const tabBox = document.createElement("div");
         tabBox.id = "bank-tabs";
         tabBox.style.display = "flex";
@@ -357,7 +393,9 @@ export default class BankTabs extends Plugin {
         tabBox.style.float = "left";
         tabBox.style.width = "inherit";
         tabBox.classList.add("bank-tabs-container");
-        this.tabBox = tabBox;
+
+        this.container.appendChild(searchContainer);
+        this.container.appendChild(tabBox);
 
         let tabJson = JSON.parse(`${this.data.tabGroups}`);
 
@@ -502,6 +540,8 @@ export default class BankTabs extends Plugin {
             input.addEventListener("click", (e) => {
                 this.log(`Bank Tab selected: ${key}`);
                 let tabJsonNew = JSON.parse(`${this.data.tabGroups}`);
+
+                this.resetSearch();
 
                 const query = tabJsonNew[key];
                 this.lastQuery = query; // Store the last query
@@ -692,9 +732,9 @@ export default class BankTabs extends Plugin {
             tabBox.appendChild(input);
         }
 
-        // Insert the tab box immediately before the close button
+        // Insert the search/tab box immediately before the close button
         if (bankMenu) {
-            bankMenu.insertBefore(tabBox, mainBankItemsBox);
+            bankMenu.insertBefore(container, mainBankItemsBox);
         }
 
         // If there is a last query, immediately highlight
@@ -705,9 +745,10 @@ export default class BankTabs extends Plugin {
 
     // In removeTabBox, just remove from DOM (header) and cleanup
     removeTabBox() {
-        const existingTabBoxes = document.querySelectorAll("#bank-tabs");
-        existingTabBoxes.forEach((box) => box.remove());
-        this.tabBox = null;
+        const container = document.getElementById("bank-tabs-container");
+        if (container) container.remove();
+
+        this.container = null;
         if (this.resizeListener) {
             window.removeEventListener("resize", this.resizeListener);
             this.resizeListener = null;
@@ -822,6 +863,61 @@ export default class BankTabs extends Plugin {
                 }
             }
         });
+    }
+
+    performSearch(query: string) {
+        // Clear active class from all tabs
+        const allTabs = document.getElementsByClassName("bank-tab-button");
+
+        // If search is empty → restore previously selected tab
+        if (!query || query.trim() === "") {
+            for (let i = 0; i < allTabs.length; i++) {
+                const tab = allTabs[i] as HTMLElement;
+                if (tab.id === `bank-tab-id-${this.selectedTab.trim()}`) {
+                    tab.classList.add("active");
+                } else {
+                    tab.classList.remove("active");
+                }
+            }
+
+            // Restore the tab’s filter
+            this.highlightBankQuery(this.lastQuery);
+            return;
+        }
+
+        for (let i = 0; i < allTabs.length; i++) {
+            allTabs[i].classList.remove("active");
+        }
+
+        // Empty search → return to current tab
+        if (!query || query.trim() === "") {
+            this.highlightBankQuery(this.lastQuery);
+            return;
+        }
+
+        // Use lowercase once
+        const q = query.trim().toLowerCase();
+
+        // Run custom search: match partial names OR ids
+        const results: string[] = [];
+
+        const bankItems =
+            this.gameHooks.EntityManager.Instance.MainPlayer._bankItems._items || [];
+
+        for (let i = 0; i < bankItems.length; i++) {
+            const item = bankItems[i];
+            if (!item) continue;
+
+            const itemDef = document.highlite.gameHooks.ItemDefinitionManager._itemDefMap.get(item._id);
+            const name = itemDef?._nameCapitalized || itemDef?._name || `${item._id}`;
+
+            if (name.toLowerCase().includes(q) || `${item._id}`.includes(q)) {
+                results.push(`${item._id}`);
+            }
+        }
+
+        // Highlight using found IDs
+        this.highlightBankQuery(results);
     }
 
     // Cleanup method
