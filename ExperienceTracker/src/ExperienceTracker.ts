@@ -162,6 +162,7 @@ export default class ExperienceTracker extends Plugin {
         crime: '🥷',
         enchanting: '✨',
         potionmaking: '🧪',
+        athletics: '🚶‍♂️',
     };
 
     skillTrackers: {
